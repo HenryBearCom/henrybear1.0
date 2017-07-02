@@ -20,7 +20,6 @@
   <script language="javascript">
 		$(function(){
 			$("#btn").click(function(){
-				var url = "localhost:8080/pm/servlet/Reg";
 				var param = {account:"",name:"",idcard:"",tel:"",email:""};
 				param.account = document.form1.account.value;
 				param.name = document.form1.name.value;

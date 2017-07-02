@@ -20,9 +20,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="D:/jar/mybatis-3.4.4/mybatis-3.4.4/mybatis-3.4.4.jar"/>
-	<classpathentry kind="lib" path="D:/jar/henrybear.util.1.0.jar"/>
 	<classpathentry kind="lib" path="D:/jar/javax.servlet-5.1.12.jar"/>
 	<classpathentry kind="lib" path="D:/jar/apache-log4j-2.8.2-bin/apache-log4j-2.8.2-bin/log4j-api-2.8.2.jar"/>
 	<classpathentry kind="lib" path="D:/jar/apache-log4j-2.8.2-bin/apache-log4j-2.8.2-bin/log4j-core-2.8.2.jar"/>
+	<classpathentry kind="lib" path="D:/jar/dom4j-2.0.1.jar"/>
+	<classpathentry kind="lib" path="D:/jar/commons-beanutils-1.8.1.jar/commons-beanutils-1.8.1.jar"/>
+	<classpathentry kind="lib" path="D:/jar/commons-logging-4.0.6.jar/commons-logging-4.0.6.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

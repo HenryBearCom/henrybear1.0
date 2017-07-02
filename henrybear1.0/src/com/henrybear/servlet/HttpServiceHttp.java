@@ -1,7 +1,10 @@
 package com.henrybear.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.henrybear.flows.DoFlows;
+import com.henrybear.util.Context;
 
 public class HttpServiceHttp extends HttpServlet {
 
@@ -72,12 +78,25 @@ public class HttpServiceHttp extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		
-		log.info("servlet start...");
-		log.debug("hello world");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("hello world");
+		Map param = new HashMap();
+		param.put("account", request.getParameter("account"));
+		param.put("name", request.getParameter("name"));
+		param.put("idcard", request.getParameter("idcard"));
+//		param.put("regdate", request.getParameter("regdate"));
+		Context context = new Context();
+		context.setContext("param", param);
+		try {
+			DoFlows.doFlows(context, new File("E:\\workspace\\HenryBear\\henrybear1.0\\WebRoot\\config\\reginfo.xml"));
+			out.println("success");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			out.println(e);
+		}
+		log.info("servlet start...");
+		log.debug("hello world");
 		out.flush();
 		out.close();
 	}

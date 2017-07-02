@@ -20,7 +20,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class MybatisFactory {
 	
 	public static SqlSession getSqlSession() throws FileNotFoundException{
-		String resource = "./config/mybatis-config.xml";
+		String resource = "E:\\workspace\\HenryBear\\henrybear1.0\\WebRoot\\config\\mybatis-config.xml";
 		InputStream inputStream = new FileInputStream(new File(resource));
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		SqlSession sql = sqlSessionFactory.openSession();

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules>
+	<module id="node1" class="com.henrybear.flows.SqlSessionStep">
+		<input></input>
+	</module>
+	<module id="node2" class="com.henrybear.flows.RegInfoStep">
+		<input>
+			<property name="account" value="xxxx" />
+			<property name="name" value="xxxx" />
+			<property name="idcard" value="xxx" />
+		</input>
+	</module>
+</modules>

@@ -19,18 +19,19 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
  */
 public class MybatisFactory {
 	
-	public static SqlSession getSqlSession() throws FileNotFoundException{
-		String resource = "E:\\workspace\\HenryBear\\henrybear1.0\\WebRoot\\config\\mybatis-config.xml";
+	public static SqlSession getSqlSession(String APPpath) throws FileNotFoundException{
+		String resource = APPpath + "/config/mybatis-config.xml";
+		
 		InputStream inputStream = new FileInputStream(new File(resource));
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		SqlSession sql = sqlSessionFactory.openSession();
 		return sql;
 	}
 	
-	public static SqlSession getSqlSession(String env) throws FileNotFoundException{
-		String resource = "./config/mybatis-config.xml";
+	public static SqlSession getSqlSession(String APPpath,String env) throws FileNotFoundException{
+		String resource = APPpath + "/config/mybatis-config.xml";
 		InputStream inputStream = new FileInputStream(new File(resource));
-		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream, env);
 		SqlSession sql = sqlSessionFactory.openSession();
 		return sql;
 	}

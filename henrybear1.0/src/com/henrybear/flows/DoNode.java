@@ -10,6 +10,7 @@ public class DoNode {
 		Class obj = Class.forName(clazz);
 		Step step = (Step) obj.newInstance();
 		context.setContext(node.getId(), node.getInput());
+		context.setContext("stepid", node.getId());
 		System.out.println("准备执行"+node.getId()+"...");
 		step.executor(context);
 		System.out.println(node.getId()+"执行完成");

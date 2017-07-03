@@ -20,7 +20,6 @@ public class DoFlows {
 		XML xml = new XML(config);
 		List<XMLNode> nodes	= xml.xmlAnalyse();
 		for(XMLNode node : nodes){
-			context.setContext("stepnode", node.getId());
 			DoNode.doNode(node, context);
 		}
 	}

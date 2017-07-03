@@ -87,8 +87,10 @@ public class HttpServiceHttp extends HttpServlet {
 //		param.put("regdate", request.getParameter("regdate"));
 		Context context = new Context();
 		context.setContext("param", param);
+		String path = request.getSession().getServletContext().getRealPath("/");
+		context.setContext("APPpath", path);
 		try {
-			DoFlows.doFlows(context, new File("E:\\workspace\\HenryBear\\henrybear1.0\\WebRoot\\config\\reginfo.xml"));
+			DoFlows.doFlows(context, new File(path+"/config/reginfo.xml"));
 			out.println("success");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

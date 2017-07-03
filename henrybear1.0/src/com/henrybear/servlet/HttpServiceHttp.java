@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.henrybear.flows.DoFlows;
 import com.henrybear.util.Context;
 
@@ -74,7 +71,6 @@ public class HttpServiceHttp extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Logger log = LogManager.getLogger();
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -97,8 +93,6 @@ public class HttpServiceHttp extends HttpServlet {
 			e.printStackTrace();
 			out.println(e);
 		}
-		log.info("servlet start...");
-		log.debug("hello world");
 		out.flush();
 		out.close();
 	}

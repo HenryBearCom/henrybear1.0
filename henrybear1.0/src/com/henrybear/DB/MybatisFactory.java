@@ -12,6 +12,7 @@ import java.io.InputStream;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.log4j.Logger;
 
 /**
  * @author Administrator
@@ -19,7 +20,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
  */
 public class MybatisFactory {
 	
+	private static Logger log = Logger.getLogger("mybatis");
+	
 	public static SqlSession getSqlSession(String APPpath) throws FileNotFoundException{
+		log.info("mybatis¿ò¼ÜÆô¶¯...");
 		String resource = APPpath + "/config/mybatis-config.xml";
 		
 		InputStream inputStream = new FileInputStream(new File(resource));
@@ -29,6 +33,7 @@ public class MybatisFactory {
 	}
 	
 	public static SqlSession getSqlSession(String APPpath,String env) throws FileNotFoundException{
+		log.info("mybatis¿ò¼ÜÆô¶¯...");
 		String resource = APPpath + "/config/mybatis-config.xml";
 		InputStream inputStream = new FileInputStream(new File(resource));
 		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream, env);

@@ -3,12 +3,19 @@
  */
 package com.henrybear.bean;
 
+import java.io.Serializable;
+
 /**
  * @author Administrator
  *
  */
-public class RegInfo {
+public class RegInfo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7038325586026258664L;
+	
 	private String account;
 	private String name;
 	private String idcard;

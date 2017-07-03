@@ -7,6 +7,11 @@
     	values (#{account},#{name},#{idcard},#{tel},#{email},#{regdate})
     </insert>
     
+    <insert id="insert_passwd"  parameterType="com.henrybear.bean.Passwd" >
+    	insert into passwd (account,passwd,bak1,bak2) 
+    	values (#{account},#{passwd},#{bak1},#{bak2})
+    </insert>
+    
     <select id="selectlist" resultType="com.henrybear.bean.RegInfo" >
     	select * from reginfo
     </select>

@@ -77,17 +77,26 @@ public class HttpServiceHttp extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		Map param = new HashMap();
-		param.put("account", request.getParameter("account"));
-		param.put("name", request.getParameter("name"));
-		param.put("idcard", request.getParameter("idcard"));
 //		param.put("regdate", request.getParameter("regdate"));
+		String flag = request.getParameter("flag");
 		Context context = new Context();
-		context.setContext("param", param);
 		String path = request.getSession().getServletContext().getRealPath("/");
 		context.setContext("APPpath", path);
 		try {
-			DoFlows.doFlows(context, new File(path+"/config/reginfo.xml"));
-			out.println("success");
+			if(!"reg".equals(flag.trim())){
+				param.put("account", request.getParameter("account"));
+				param.put("name", request.getParameter("name"));
+				param.put("idcard", request.getParameter("idcard"));
+				context.setContext("param", param);
+				DoFlows.doFlows(context, new File(path+"/config/reginfo.xml"));
+				request.setAttribute("account", param.get("account"));
+				request.getRequestDispatcher("/WEB-INF/reg.jsp").forward(request, response);
+			}else{
+				param.put("passwd", request.getParameter("pwd"));
+				context.setContext("param", param);
+				DoFlows.doFlows(context, new File(path+"/config/regflow.xml"));
+				out.println("success");
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

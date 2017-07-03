@@ -20,20 +20,21 @@
   <script language="javascript">
 		$(function(){
 			$("#btn").click(function(){
-				var param = {account:"",name:"",idcard:"",tel:"",email:"",flag:""};
-				param.account = document.form1.account.value;
-				param.name = document.form1.name.value;
-				param.idcard= document.form1.idcard.value;
-				param.tel = document.form1.tel.value;
-				param.email = document.form1.email.value;
-				param.flag = "";
+				var pwd1 = document.form1.pwd.value;
+				var pwd2 = document.form1.pwd1.value;
+				if(pwd1 != pwd2){
+					alert("两次输入的密码不一致");
+				}
+				var param = {pwd:"",flag:""};
+				param.pwd = pwd1;
+				param.flag = "reg";
 				$.ajax({
 					type:"POST",
 					url		:	"http://localhost:8080/henrybear1.0/servlet/HttpServiceHttp",
 					data	:	param,
 					dataType:	"text",
 					success	:	function(data){
-						/* alert(data); */
+						alert(data);
 					},
 					error	:	function(XMLHttpRequest,textStatus,errorThrow){
 						alert(textStatus);
@@ -49,13 +50,9 @@
     		<legend>注册</legend>
 	    	<form name="form1">
 		    	<table align="center">
-		    		<tr><td align="right">账号*：</td><td align="left"><input type="text" id="account" name="account" style="width:200px;"/></td></tr>
-		    		<tr><td align="right">姓名*：</td><td align="left"><input type="text" id="name" name="name" style="width:200px;"/></td></tr>
-		    		<tr><td align="right">身份证号*：</td><td align="left"><input type="text" id="idcard" name="idcard" style="width:200px;"/></td></tr>
-		    		<tr><td align="right">电话*：</td><td align="left"><input type="text" id="tel" name="tel" style="width:200px;"/></td></tr>
-		    		<tr><td align="right">邮箱*：</td><td align="left"><input type="text" id="email" name="email" style="width:200px;"/></td></tr>
-		    		<tr><td align="right">个人介绍 :</td><td align="left"><textarea rows="5" cols="40"></textarea></td></tr>
-		    		<tr><td colspan="2" align="center"><input type="button" id="btn" name="btn" value="下&nbsp;一&nbsp;步" style="width:100px;"/></td></tr>
+		    		<tr><td align="right">密码*：</td><td align="left"><input type="password" placeholder="请设置登陆密码" id="pwd" name="pwd" style="width:200px;"/></td></tr>
+		    		<tr><td align="right">密码*：</td><td align="left"><input type="password" placeholder="请再次设置登陆密码" id="pwd1" name="pwd1" style="width:200px;"/></td></tr>
+		    		<tr><td colspan="2" align="center"><input type="button" id="btn" name="btn" value="提&nbsp;&nbsp;&nbsp;交" style="width:100px;"/></td></tr>
 		    	</table>
 	    	</form>
     	</fieldset>

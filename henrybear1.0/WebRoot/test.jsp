@@ -21,11 +21,11 @@
 		$(function(){
 			$("#btn").click(function(){
 				var param = {account:"",name:"",idcard:"",tel:"",email:"",flag:""};
-				param.account = document.form1.account.value;
-				param.name = document.form1.name.value;
-				param.idcard= document.form1.idcard.value;
-				param.tel = document.form1.tel.value;
-				param.email = document.form1.email.value;
+				param.account = $("#account").val();
+				param.name = $("#name").val();
+				param.idcard= $("#idcard").val();
+				param.tel = $("#tel").val();
+				param.email = $("#email").val();
 				param.flag = "";
 				$.ajax({
 					type:"POST",
@@ -33,7 +33,10 @@
 					data	:	param,
 					dataType:	"text",
 					success	:	function(data){
-						/* alert(data); */
+						 alert(data); 
+						 var datas = data.split("|");
+						 param.account = datas[1];
+						 location.href ="http://localhost:8080/henrybear1.0"+ datas[0];
 					},
 					error	:	function(XMLHttpRequest,textStatus,errorThrow){
 						alert(textStatus);

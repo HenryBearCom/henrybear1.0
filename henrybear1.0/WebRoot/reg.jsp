@@ -1,8 +1,25 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%
+	String account = "";
+	Cookie[] cookies = request.getCookies();
+	try{
+		for(Cookie cookie :cookies){
+			if(cookie.getName().trim().equalsIgnoreCase("account")){
+				account = cookie.getValue().trim();
+				cookie.setValue("");
+				cookie.setMaxAge(0);
+			}
+		}
+	}catch (NullPointerException e){
+		account = "";
+	}
+ %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+  	<%if(account == "" || account == null){ %>
+    <jsp:forward page="/test.jsp"></jsp:forward>
+    <%} %>
     
     <title>注册</title>
     
@@ -20,12 +37,17 @@
   <script language="javascript">
 		$(function(){
 			$("#btn").click(function(){
-				var pwd1 = document.form1.pwd.value;
-				var pwd2 = document.form1.pwd1.value;
+				var pwd1 = $("#pwd").val();
+				var pwd2 = $("#pwd1").val();
 				if(pwd1 != pwd2){
 					alert("两次输入的密码不一致");
+					return false;
 				}
-				var param = {pwd:"",flag:""};
+				if(pwd1.length < 6){
+					alert("密码位数不得小于6位");
+					return false;
+				}
+				var param = {pwd:"",flag:"",account:"<%=account %>"};
 				param.pwd = pwd1;
 				param.flag = "reg";
 				$.ajax({

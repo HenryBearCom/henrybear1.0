@@ -27,6 +27,7 @@ public class RegInfoStep extends Step {
 		
 		sql.insert("henrybearMapper.insert_reginfo", reginfo);
 		sql.commit();
+		sql.close();
 	}
 
 }

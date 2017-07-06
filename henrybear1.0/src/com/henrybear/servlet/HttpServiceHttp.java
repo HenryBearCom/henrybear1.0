@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -82,19 +83,28 @@ public class HttpServiceHttp extends HttpServlet {
 		Context context = new Context();
 		String path = request.getSession().getServletContext().getRealPath("/");
 		context.setContext("APPpath", path);
+		
+		String account = request.getParameter("account");
 		try {
 			if(!"reg".equals(flag.trim())){
-				param.put("account", request.getParameter("account"));
+				param.put("account", account);
 				param.put("name", request.getParameter("name"));
 				param.put("idcard", request.getParameter("idcard"));
 				context.setContext("param", param);
 				DoFlows.doFlows(context, new File(path+"/config/reginfo.xml"));
-				request.setAttribute("account", param.get("account"));
-				request.getRequestDispatcher("/WEB-INF/reg.jsp").forward(request, response);
+				Cookie cookie = new Cookie("account",account);
+				cookie.setPath("/");
+				response.addCookie(cookie);
+				out.print("/reg.jsp|"+account);
 			}else{
 				param.put("passwd", request.getParameter("pwd"));
+				param.put("account", account);
 				context.setContext("param", param);
 				DoFlows.doFlows(context, new File(path+"/config/regflow.xml"));
+				Cookie cookie = new Cookie("account","");
+				cookie.setPath("/");
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
 				out.println("success");
 			}
 		} catch (Exception e) {

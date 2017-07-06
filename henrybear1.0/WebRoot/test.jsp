@@ -20,9 +20,10 @@
   <script language="javascript">
 		$(function(){
 			$("#btn").click(function(){
-				var param = {account:"",name:"",idcard:"",tel:"",email:"",flag:""};
+				var param = {account:"",name:"",sex:"",idcard:"",tel:"",email:"",flag:""};
 				param.account = $("#account").val();
 				param.name = $("#name").val();
+				param.sex = $("#sex").val();
 				param.idcard= $("#idcard").val();
 				param.tel = $("#tel").val();
 				param.email = $("#email").val();
@@ -33,10 +34,8 @@
 					data	:	param,
 					dataType:	"text",
 					success	:	function(data){
-						 alert(data); 
-						 var datas = data.split("|");
-						 param.account = datas[1];
-						 location.href ="http://localhost:8080/henrybear1.0"+ datas[0];
+						/*  alert(data);  */
+						 location.href ="http://localhost:8080/henrybear1.0"+ data;
 					},
 					error	:	function(XMLHttpRequest,textStatus,errorThrow){
 						alert(textStatus);
@@ -44,6 +43,17 @@
 				});
 				
 			})
+			function checks(t){
+			   szMsg="[#_%&'/,;:=!^\"]";
+			   alertStr="";
+			   for(i=1;i<szMsg.length+1;i++){
+				    if(t.indexOf(szMsg.substring(i-1,i))>-1){
+					    alertStr="请勿包含非法字符如[#_%&'/,;:=!^\"]";
+				    	alert(alertStr);
+				   		return false;
+				    }
+			   }
+			}
 		})
 	</script>
   <body>
@@ -52,8 +62,17 @@
     		<legend>注册</legend>
 	    	<form name="form1">
 		    	<table align="center">
-		    		<tr><td align="right">账号*：</td><td align="left"><input type="text" id="account" name="account" style="width:200px;"/></td></tr>
+		    		<tr><td align="right">账号*：</td>
+		    		<td align="left" style="width:400px;"><input type="text" id="account" name="account" style="width:200px;" placeholder="账号由英文字母、数字组成"/>
+		    		</tr>
 		    		<tr><td align="right">姓名*：</td><td align="left"><input type="text" id="name" name="name" style="width:200px;"/></td></tr>
+		    		<tr><td align="right">性别*：</td>
+		    		<td align="left">
+					<select id="sex" style="width:80px;">
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
+					</td></tr>
 		    		<tr><td align="right">身份证号*：</td><td align="left"><input type="text" id="idcard" name="idcard" style="width:200px;"/></td></tr>
 		    		<tr><td align="right">电话*：</td><td align="left"><input type="text" id="tel" name="tel" style="width:200px;"/></td></tr>
 		    		<tr><td align="right">邮箱*：</td><td align="left"><input type="text" id="email" name="email" style="width:200px;"/></td></tr>

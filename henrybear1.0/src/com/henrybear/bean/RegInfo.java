@@ -18,6 +18,7 @@ public class RegInfo implements Serializable {
 	
 	private String account;
 	private String name;
+	private String sex;
 	private String idcard;
 	private String tel;
 	private String email;
@@ -38,6 +39,12 @@ public class RegInfo implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 	public String getIdcard() {
 		return idcard;
@@ -95,10 +102,11 @@ public class RegInfo implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "RegInfo [account=" + account + ", name=" + name + ", idcard="
-				+ idcard + ", tel=" + tel + ", email=" + email + ", regdate="
-				+ regdate + ", bak1=" + bak1 + ", bak2=" + bak2 + ", bak3="
-				+ bak3 + ", bak4=" + bak4 + ", bak5=" + bak5 + "]";
+		return "RegInfo [account=" + account + ", name=" + name + ", sex="
+				+ sex + ", idcard=" + idcard + ", tel=" + tel + ", email="
+				+ email + ", regdate=" + regdate + ", bak1=" + bak1 + ", bak2="
+				+ bak2 + ", bak3=" + bak3 + ", bak4=" + bak4 + ", bak5=" + bak5
+				+ "]";
 	}
 	
 	

@@ -3,8 +3,8 @@
 <mapper namespace="henrybearMapper">
     
     <insert id="insert_reginfo"  parameterType="com.henrybear.bean.RegInfo" >
-    	insert into reginfo (account,name,idcard,tel,email,regdate) 
-    	values (#{account},#{name},#{idcard},#{tel},#{email},#{regdate})
+    	insert into reginfo (account,name,sex,idcard,tel,email,regdate) 
+    	values (#{account},#{name},#{sex},#{idcard},#{tel},#{email},#{regdate})
     </insert>
     
     <insert id="insert_passwd"  parameterType="com.henrybear.bean.Passwd" >

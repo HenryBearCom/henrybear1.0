@@ -89,13 +89,14 @@ public class HttpServiceHttp extends HttpServlet {
 			if(!"reg".equals(flag.trim())){
 				param.put("account", account);
 				param.put("name", request.getParameter("name"));
+				param.put("sex", request.getParameter("sex"));
 				param.put("idcard", request.getParameter("idcard"));
 				context.setContext("param", param);
 				DoFlows.doFlows(context, new File(path+"/config/reginfo.xml"));
 				Cookie cookie = new Cookie("account",account);
 				cookie.setPath("/");
 				response.addCookie(cookie);
-				out.print("/reg.jsp|"+account);
+				out.print("/reg.jsp");
 			}else{
 				param.put("passwd", request.getParameter("pwd"));
 				param.put("account", account);

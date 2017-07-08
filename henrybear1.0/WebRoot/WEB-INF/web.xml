@@ -6,24 +6,34 @@
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>HttpServlet</servlet-name>
-    <servlet-class>com.henrybear.servlet.HttpServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>HttpServiceHttp</servlet-name>
     <servlet-class>com.henrybear.servlet.HttpServiceHttp</servlet-class>
   </servlet>
+  <servlet>
+  	<description>test.jsp</description>
+  	<display-name>test.jsp</display-name>
+  	<servlet-name>test</servlet-name>
+  	<jsp-file>/test.jsp</jsp-file>
+  </servlet>
+  <servlet>
+  	<description>reg.jsp</description>
+  	<display-name>reg.jsp</display-name>
+  	<servlet-name>reg</servlet-name>
+  	<jsp-file>/reg.jsp</jsp-file>
+  </servlet>
+	
 
-
-  <servlet-mapping>
-    <servlet-name>HttpServlet</servlet-name>
-    <url-pattern>/servlet/HttpServlet</url-pattern>
-  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>HttpServiceHttp</servlet-name>
     <url-pattern>/servlet/HttpServiceHttp</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>test</servlet-name>
+  	<url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>reg</servlet-name>
+  	<url-pattern>/reg</url-pattern>
   </servlet-mapping>
 
 </web-app>

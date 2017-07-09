@@ -7,6 +7,9 @@
     <listener>
     	<listener-class>com.henrybear.listener.WebListener</listener-class>
     </listener>
+    <listener>
+    	<listener-class>com.henrybear.listener.AttributeListener</listener-class>
+    </listener>
     
   <servlet>
     <description>HttpServiceHttp</description>

@@ -22,7 +22,7 @@ public class WebListener implements HttpSessionListener,
 		// TODO Auto-generated method stub
 		HttpServletRequest request = (HttpServletRequest) sre.getServletRequest();
 		long time = System.currentTimeMillis() - (Long)request.getAttribute("dateCreated");
-		log.info(request.getRemoteAddr() +	"请求处理结束，用时：" + time/1000 + "s。");
+		log.info(request.getRemoteAddr() +	"请求处理结束，用时：" + time + " ms。");
 	}
 
 	@Override

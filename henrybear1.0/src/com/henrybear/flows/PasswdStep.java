@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.henrybear.bean.Passwd;
 import com.henrybear.util.Context;
+import com.henrybear.util.Encoder;
 
 /**
  * @author Administrator
@@ -31,6 +32,9 @@ public class PasswdStep extends Step {
 		for(String key:set){
 			BeanUtils.setProperty(passwd, key, map.get(key));
 		}
+		String pwd = passwd.getPasswd();
+		pwd = Encoder.enCoder(pwd, "MD5");
+		passwd.setPasswd(pwd);
 		SqlSession sql = (SqlSession) context.getContext("sqlSession");
 		
 		sql.insert("henrybearMapper.insert_passwd", passwd);

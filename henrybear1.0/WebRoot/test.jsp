@@ -28,6 +28,10 @@
 				param.tel = $("#tel").val();
 				param.email = $("#email").val();
 				param.flag = "";
+				if(param.account == "" || param.name == "" || param.idcard == ""){
+					alert("账号、姓名、身份证号不能为空");
+					return false;
+				}
 				$.ajax({
 					type:"POST",
 					url		:	"http://localhost:8080/henrybear1.0/servlet/HttpServiceHttp",

@@ -10,6 +10,21 @@
     <listener>
     	<listener-class>com.henrybear.listener.AttributeListener</listener-class>
     </listener>
+    <filter>
+    	<description>utf-8编码</description>
+    	<display-name>encoding</display-name>
+    	<filter-name>encoding</filter-name>
+    	<filter-class>com.henrybear.filter.EncodingFilter</filter-class>
+    	<init-param>
+    		<param-name>encoding</param-name>
+    		<param-value>UTF-8</param-value>
+    	</init-param>
+    </filter>
+    <filter-mapping>
+    	<filter-name>encoding</filter-name>
+    	<servlet-name>HttpServiceHttp</servlet-name>
+    	<url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
     
   <servlet>
     <description>HttpServiceHttp</description>

@@ -12,11 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.henrybear.flows.DoFlows;
 import com.henrybear.util.Context;
 
 public class HttpServiceHttp extends HttpServlet {
 
+	private Logger log = Logger.getLogger("servlet");
+	
 	/**
 	 * Constructor of the object.
 	 */
@@ -44,20 +48,7 @@ public class HttpServiceHttp extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		doPost(request,response);
 	}
 
 	/**
@@ -73,12 +64,13 @@ public class HttpServiceHttp extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+//		request.setCharacterEncoding("UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+		log.debug(response.getCharacterEncoding()+","+request.getCharacterEncoding());
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		Map param = new HashMap();
-//		param.put("regdate", request.getParameter("regdate"));
 		String flag = request.getParameter("flag");
 		Context context = new Context();
 		String path = request.getSession().getServletContext().getRealPath("/");

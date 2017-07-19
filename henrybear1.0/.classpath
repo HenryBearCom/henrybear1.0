@@ -25,5 +25,9 @@
 	<classpathentry kind="lib" path="D:/jar/commons-beanutils-1.8.1.jar/commons-beanutils-1.8.1.jar"/>
 	<classpathentry kind="lib" path="D:/jar/commons-logging-4.0.6.jar/commons-logging-4.0.6.jar"/>
 	<classpathentry kind="lib" path="D:/jar/log4j-1.2.17/apache-log4j-1.2.17/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="D:/jar/commons-digester3-3.2-bin/commons-digester3-3.2/commons-digester3-3.2.jar"/>
+	<classpathentry kind="lib" path="D:/jar/commons-collections4-4.1-bin/commons-collections4-4.1/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="D:/jar/quartz-2.2.3-distribution/quartz-2.2.3/lib/quartz-2.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/jar/quartz-2.2.3-distribution/quartz-2.2.3/lib/quartz-jobs-2.2.3.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

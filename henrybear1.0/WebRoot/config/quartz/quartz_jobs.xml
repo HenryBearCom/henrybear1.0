@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>  
+    <job-scheduling-data xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"  
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+       xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData http://www.quartz-scheduler.org/xml/job_scheduling_data_2_0.xsd"  
+       version="2.0">  
+       <schedule>  
+       <!-- job1 -->  
+        <job>  
+            <name>MyJob1</name>  
+            <group>group1</group>  
+            <description> 通过配置文件来执行job任务 </description>  
+            <job-class> com.henrybear.quartz.DemoJob</job-class>  
+            <durability>false</durability>  
+            <recover>false</recover>  
+                <!--   
+                <job-data-map allows-transient-data="true">  
+                    <entry>  
+                        <key>JOB_DATA_MAP_KEY</key>  
+                        <value>key</value>  
+                    </entry>  
+                </job-data-map>  
+                 -->  
+          </job>  
+          <trigger>  
+             <cron>  
+                 <name>my-trigger</name>  
+                 <group>MYTRIGGER_GROUP</group>  
+                 <job-name>MyJob1</job-name>  
+                 <job-group>group1</job-group>  
+                 <!-- trigger every night at 4:30 am -->  
+                 <!-- do not forget to light the kitchen's light -->  
+                 <cron-expression>0 0/1 * * * ?</cron-expression>  
+             </cron>  
+         </trigger>  
+        </schedule>  
+    </job-scheduling-data>  

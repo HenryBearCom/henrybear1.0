@@ -17,11 +17,11 @@ public class Context<k,v> {
 		this.map = new HashMap<k,v>();
 	}
 	
-	public void setContext(k key,v value){
+	public synchronized void setContext(k key,v value){
 		this.map.put(key, value);
 	}
 	
-	public v getContext(k key){
+	public synchronized v getContext(k key){
 		return map.get(key);
 	}
 }

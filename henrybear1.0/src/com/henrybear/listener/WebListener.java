@@ -39,7 +39,7 @@ public class WebListener implements HttpSessionListener,
 	public void contextDestroyed(ServletContextEvent sce) {
 		// TODO Auto-generated method stub
 		ServletContext servletContext = sce.getServletContext();
-		log.info("即将关闭 "+servletContext.getContextPath());
+//		log.info("即将关闭 "+servletContext.getContextPath());
 	}
 
 	@Override

@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//WebRoot/WEB-INF/content/delproject.jsp=UTF-8
+encoding//WebRoot/WEB-INF/content/mainFrame.jsp=UTF-8
+encoding//WebRoot/WEB-INF/content/modproject.jsp=UTF-8
+encoding//WebRoot/WEB-INF/content/projectadd.jsp=UTF-8
+encoding//WebRoot/WEB-INF/content/projectmanage.jsp=UTF-8
+encoding//WebRoot/WEB-INF/content/projectsearch.jsp=UTF-8
+encoding//WebRoot/WEB-INF/content/quality.jsp=UTF-8
+encoding//src/log4j.properties=GBK

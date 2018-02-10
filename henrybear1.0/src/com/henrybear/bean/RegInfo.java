@@ -27,7 +27,12 @@ public class RegInfo implements Serializable {
 	private String bak2;
 	private String bak3;
 	private String bak4;
-	private String bak5;
+	private String bak;
+	
+	private String password;
+	
+	private String title;
+	
 	public String getAccount() {
 		return account;
 	}
@@ -70,6 +75,12 @@ public class RegInfo implements Serializable {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getBak1() {
 		return bak1;
 	}
@@ -94,19 +105,25 @@ public class RegInfo implements Serializable {
 	public void setBak4(String bak4) {
 		this.bak4 = bak4;
 	}
-	public String getBak5() {
-		return bak5;
+	public String getBak() {
+		return bak;
 	}
-	public void setBak5(String bak5) {
-		this.bak5 = bak5;
+	public void setBak(String bak) {
+		this.bak = bak;
 	}
 	@Override
 	public String toString() {
 		return "RegInfo [account=" + account + ", name=" + name + ", sex="
 				+ sex + ", idcard=" + idcard + ", tel=" + tel + ", email="
 				+ email + ", regdate=" + regdate + ", bak1=" + bak1 + ", bak2="
-				+ bak2 + ", bak3=" + bak3 + ", bak4=" + bak4 + ", bak5=" + bak5
+				+ bak2 + ", bak3=" + bak3 + ", bak4=" + bak4 + ", bak=" + bak
 				+ "]";
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	

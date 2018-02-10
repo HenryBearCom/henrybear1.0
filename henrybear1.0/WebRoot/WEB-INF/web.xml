@@ -44,6 +44,23 @@
   	<servlet-name>reg</servlet-name>
   	<jsp-file>/reg.jsp</jsp-file>
   </servlet>
+  
+  <servlet>
+    <servlet-name>springmvc</servlet-name>
+    <servlet-class>
+        org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/config/springmvc-config.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <!-- 让Spring MVC的前端控制器拦截所有请求 -->
+  <servlet-mapping>
+    <servlet-name>springmvc</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
 	
 
   <servlet-mapping>

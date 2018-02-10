@@ -3,8 +3,8 @@
 <mapper namespace="henrybearMapper">
     
     <insert id="insert_reginfo"  parameterType="com.henrybear.bean.RegInfo" >
-    	insert into reginfo (account,name,sex,idcard,tel,email,regdate) 
-    	values (#{account},#{name},#{sex},#{idcard},#{tel},#{email},#{regdate})
+    	insert into reginfo (account,name,sex,idcard,tel,email,regdate,password) 
+    	values (#{account},#{name},#{sex},#{idcard},#{tel},#{email},#{regdate},#{password})
     </insert>
     
     <insert id="insert_passwd"  parameterType="com.henrybear.bean.Passwd" >
@@ -12,8 +12,42 @@
     	values (#{account},#{passwd},#{bak1},#{bak2})
     </insert>
     
-    <select id="selectlist" resultType="com.henrybear.bean.RegInfo" >
-    	select * from reginfo
+    <select id="selectlist" parameterType="com.henrybear.bean.RegInfo"  resultType="com.henrybear.bean.RegInfo" >
+    	select * from reginfo where 1=1
+    	<if test="account != null">
+		    AND account = #{account}
+		</if>
     </select>
     
+    
+    <insert id="insert_projectmanage"  parameterType="com.henrybear.bean.ProjectBean" >
+    	insert into projectmanage (serial,serialname,description,fuzeren,fuzerentel,starttime,deadtime,bak,bak2) 
+    	values (#{serial},#{serialname},#{description},#{fuzeren},#{fuzerentel},#{starttime},#{deadtime},#{bak},#{bak2})
+    </insert>
+    
+    <select id="select_projectlist" parameterType="com.henrybear.bean.ProjectBean"  resultType="com.henrybear.bean.ProjectBean" >
+    	select * from projectmanage where 1=1
+    	<if test="serial != null and serial!=''">
+		    AND serial = #{serial}
+		</if>
+    	<if test="serialname != null and serialname!=''">
+		    AND serialname = #{serialname}
+		</if>
+    </select>
+    
+    <update id="update_projectmanage"  parameterType="com.henrybear.bean.ProjectBean">
+    	update projectmanage 
+		<set>
+	      <if test="serialname != null and serialname !=''">serialname=#{serialname},</if>
+	      <if test="description != null and description !=''">description=#{description},</if>
+	      <if test="fuzeren != null and fuzeren !=''">fuzeren=#{fuzeren},</if>
+	      <if test="fuzerentel != null and fuzerentel !=''">fuzerentel=#{fuzerentel},</if>
+	      <if test="starttime != null and starttime !=''">starttime=#{starttime},</if>
+	      <if test="deadtime != null and deadtime !=''">deadtime=#{deadtime},</if>
+	      <if test="bak != null and bak !=''">bak=#{bak},</if>
+	      <if test="bak1 != null and bak1 !=''">bak1=#{bak1},</if>
+	      <if test="bak2 != null and bak2 !=''">bak2=#{bak2}</if>
+    	</set>
+  		where serial=#{serial}
+    </update>
 </mapper>

@@ -1,0 +1,47 @@
+#创建数据库
+create database pmdb;
+###创建帐号、密码表
+create table passwd(
+id INT(10) NOT NULL AUTO_INCREMENT primary key,
+account varchar(20) not null,
+passwd varchar(256) not null,
+bak1 varchar(100),
+bak2 varchar(1024)
+);
+##创建帐号信息表
+create table reginfo(
+id INT(10) NOT NULL AUTO_INCREMENT primary key,
+account varchar(20) not null,
+name varchar(50) not null,
+sex varchar(5),
+idcard varchar(18),
+tel varchar(20),
+email varchar(100),
+regdate varchar(20),
+password varchar(256),
+bak varchar(100),
+bak1 varchar(100),
+bak2 varchar(100),
+bak3 varchar(1024),
+bak4 varchar(1024)
+);
+##创建信息表唯一索引
+create unique index UK_account on reginfo (account);
+
+##创建项目总表
+create table projectmanage(
+id INT(10) NOT NULL AUTO_INCREMENT primary key,
+serial varchar(50) not null,
+serialname varchar(50) not null,
+description  varchar(200),
+fuzeren varchar(20),
+fuzerentel varchar(20),
+starttime varchar(10),
+deadtime varchar(10),
+status varchar(2),
+bak varchar(100),
+bak1 varchar(100),
+bak2 varchar(1024)
+);
+create unique index UK_account on projectmanage (serial);
+

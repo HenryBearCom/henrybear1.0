@@ -9,6 +9,31 @@
 	src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
 </head>
 <script language="javascript">
+$(document).ready(function(){
+	init();
+});
+
+var arrs = ["serial","serialname","description","fuzeren","fuzerentel","starttime","deadtime","bak2","bak"];
+var dic = {
+		serial:"项目序号",
+		serialname:"项目名称",
+		description:"项目描述",
+		fuzeren:"负责人",
+		fuzerentel:"联系号码",
+		starttime:"项目开始时间",
+		deadtime:"项目截至时间",
+		bak2:"其他",
+		bak:"bak"
+};
+function init(){
+	var str = "<fieldset><legend>新增</legend><table>";
+	for(var i=0;i<arrs.length;i++){
+		str += "<tr><td align=\"right\"> "+dic[arrs[i]]+":</td><td align=\"left\"><input type=\"text\" id=\""+arrs[i]+"\" name=\""+arrs[i]+"\" style=\"width: 200px;\" /></td>	</tr>"
+	}
+	str += "<tr><td colspan=\"2\" align=\"center\"><input type=\"button\" id=\"btn\" name=\"btn\" value=\"新增\" style=\"width: 100px;\" /></td>	</tr></table></fieldset>";
+	$("#main").html(str);
+}
+
 		$(function(){
 			$("#btn").click(function(){
 				var param = {
@@ -66,7 +91,7 @@
     <a href="${pageContext.request.contextPath}/index.jsp">index</a>
     <a href="${pageContext.request.contextPath}/project/search">search</a>
 	<div id="main" align="center">
-		<fieldset>
+		<!-- <fieldset>
 			<legend>新增</legend>
 			<table>
 				<tr>
@@ -120,7 +145,7 @@
 				</tr>
 
 			</table>
-		</fieldset>
+		</fieldset> -->
 	</div>
 </body>
 </html>

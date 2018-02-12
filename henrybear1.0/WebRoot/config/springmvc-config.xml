@@ -4,6 +4,7 @@
     xmlns:mvc="http://www.springframework.org/schema/mvc"
     xmlns:util="http://www.springframework.org/schema/util"
     xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
@@ -42,6 +43,16 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+	<bean id="conversionService"
+		class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.henrybear.converter.String2DateConverter"
+					p:datePattern="yyyy-MM-dd"></bean>
+			</list>
+		</property>
+	</bean>
     
     <!-- 视图解析器  -->
      <bean id="viewResolver"

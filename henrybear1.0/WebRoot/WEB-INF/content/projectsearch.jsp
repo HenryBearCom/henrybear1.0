@@ -51,7 +51,7 @@ function optioned(){
 	var radios = document.getElementsByName("caozuo");
 	for(var i =0;i<radios.length;i++){
 		if(radios[i].checked==true){
-			alert("hello world");
+			/* alert("hello world"); */
 			var obj = document.getElementById("tr"+i);
 			obj.style.backgroundColor="gray";
 			return;
@@ -83,7 +83,7 @@ function optioned(){
 					   success :function(data){
 						   var listable = "<fieldset><legend>查询结果</legend><table border='1' style='border-collapse: collapse;'><tr align='center'><th>序号</th><th>项目序号</th><th>项目名称</th><th>项目描述</th><th>负责人</th><th>联系号码</th><th>项目开始时间</th><th>项目截至时间</th><th>其他</th><th>登记时间</th><th>操作</th></tr>";
 						   $.each(data,function(){
-							   param.serial = this.serial;
+							   /* param.serial = this.serial;
 								param.serialname = this.serialname;
 								param.description = this.description;
 								param.fuzeren = this.fuzeren;
@@ -91,9 +91,10 @@ function optioned(){
 								param.starttime = this.starttime;
 								param.deadtime = this.deadtime;
 								param.bak2 = this.bak2;
-								param.bak = this.bak;
+								param.bak = this.bak; */
 								n=n+1; 
-							   params.push(param);
+							   params.push(this);
+							  /*  alert(JSON.stringify(this)); */
 							   param = {
 										serial:"",
 										serialname:"",
@@ -111,7 +112,7 @@ function optioned(){
 							   +this.bak2+"</td><td>"+this.bak+"</td><td>"+"<input type='radio' id='caozuo"+n+"' name='caozuo' value=\""+n+"\" onclick='optioned();'/></td></tr>"; 
 							    */
 							   var opt = this;
-							   var row = "<tr align='center' id='tr"+n+"'/><td>"+n+"</td>";
+							   var row = "<tr align='center' id='tr"+n+"'/><td align='center'>"+n+"</td>";
 							   for(var i=0;i<arrs.length;i++){
 								   row += "<td>" + opt[arrs[i]]+"</td>";
 							   }

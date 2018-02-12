@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     This is my JSP page. <br>
     
     <a href="${pageContext.request.contextPath}/info/register">register</a><br>
-    <a href="${pageContext.request.contextPath}/project/add">add project</a><br>
+    <a href="${pageContext.request.contextPath}/project/add">add</a><br>
     <a href="${pageContext.request.contextPath}/project/search">search</a><br>
   </body>
 </html>

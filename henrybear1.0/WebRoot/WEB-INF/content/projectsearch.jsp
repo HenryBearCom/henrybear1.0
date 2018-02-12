@@ -22,6 +22,7 @@ var param = {
 		bak:"",
 		bak2:""
 };
+var arrs = ["serial","serialname","description","fuzeren","fuzerentel","starttime","deadtime","bak2","bak"];
 function mod(){
 	var radios = document.getElementsByName("caozuo");
 	for(var i =0;i<radios.length;i++){
@@ -50,8 +51,9 @@ function optioned(){
 	var radios = document.getElementsByName("caozuo");
 	for(var i =0;i<radios.length;i++){
 		if(radios[i].checked==true){
+			alert("hello world");
 			var obj = document.getElementById("tr"+i);
-			obj.style.backgroundColor="red";
+			obj.style.backgroundColor="gray";
 			return;
 		}
 	}
@@ -103,10 +105,18 @@ function optioned(){
 										bak:"",
 										bak2:""
 								};
-							   listable = listable+"<tr align='center' id='tr"+n+"'/><td>"+n+"</td> <td>"+this.serial+"</td> <td>"+this.serialname+"</td>"
+							   /* listable = listable+"<tr align='center' id='tr"+n+"'/><td>"+n+"</td> <td>"+this.serial+"</td> <td>"+this.serialname+"</td>"
 							   +"<td>"+this.description+"</td><td>"+this.fuzeren+"</td>"
 							   +"<td>"+this.fuzerentel+"</td><td>"+this.starttime+"</td><td>"+this.deadtime+"</td><td>"
-							   +this.bak2+"</td><td>"+this.bak+"</td><td>"+"<input type='radio' id='caozuo"+n+"' name='caozuo' value=\""+n+"\" onclick='optioned();'/></td></tr>";
+							   +this.bak2+"</td><td>"+this.bak+"</td><td>"+"<input type='radio' id='caozuo"+n+"' name='caozuo' value=\""+n+"\" onclick='optioned();'/></td></tr>"; 
+							    */
+							   var opt = this;
+							   var row = "<tr align='center' id='tr"+n+"'/><td>"+n+"</td>";
+							   for(var i=0;i<arrs.length;i++){
+								   row += "<td>" + opt[arrs[i]]+"</td>";
+							   }
+							   row += "<td><input type='radio' id='caozuo"+n+"' name='caozuo' value=\""+n+"\" onclick='optioned();'/></td></tr>";
+							   listable = listable+row; 
 							   
 						   })
 					        listable = listable +"<tr><td colspan='11' align='center'><input type='button' value='修改' name='mod' id='mod' onclick='mod()' />&nbsp;&nbsp;<input type='button' value='删除' name='del' id='del' onclick='del()' /></td></tr></table></fieldset>";
@@ -124,6 +134,9 @@ function optioned(){
 		})
 	</script>
 <body>
+
+    <a href="${pageContext.request.contextPath}/index.jsp">index</a>
+    <a href="${pageContext.request.contextPath}/project/add">add</a><br>
 	<div id="main" align="center">
 		<table>
 			<tr>

@@ -77,6 +77,10 @@
 	}
 </script>
 <body>
+
+    <a href="${pageContext.request.contextPath}/index.jsp">index</a>
+    <a href="${pageContext.request.contextPath}/project/search">search</a>
+    <a href="${pageContext.request.contextPath}/project/add">add</a><br>
 	<fieldset>
 		<legend>修改</legend>
 		<div id="main" align="center"></div>

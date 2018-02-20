@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,22 @@ public class InfoController {
 	private static final String SUCCESS = "success";
 	private static SqlSession sqlSession = null;
 	private static Logger log = Logger.getLogger("spring");
+	
+	@ModelAttribute
+	public void init(HttpServletRequest request) {
+		if (sqlSession == null) {
+			String webroot = request.getSession().getServletContext().getRealPath("/");
+			log.debug(webroot);
+			try {
+				sqlSession = MybatisFactory.getSqlSession(webroot);
+				log.info(sqlSession + " 会话已打开");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				log.error(e);
+			}
+		}
+	}
+	
 	
 	@RequestMapping(value="/register",method=RequestMethod.GET)
 	public String reregister(HttpServletRequest request) {

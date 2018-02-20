@@ -45,3 +45,18 @@ bak2 varchar(1024)
 );
 create unique index UK_account on projectmanage (serial);
 
+##´´½¨µÇÂ¼×´Ì¬±í
+create table loginstatus (
+id INT(10) NOT NULL AUTO_INCREMENT primary key,
+account varchar(20),
+status varchar(2),
+logintime varchar(20),
+loginip varchar(15),
+decorder varchar(64),
+decorder1 varchar(128),
+decorder2 varchar(256),
+bak varchar(100),
+bak1 varchar(1024)
+);
+create unique index UK_account on loginstatus (account);
+

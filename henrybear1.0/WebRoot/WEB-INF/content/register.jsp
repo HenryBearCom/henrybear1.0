@@ -104,7 +104,11 @@
 		})
 	</script>
   <body>
-    <div id="main" style="position:absolute;left:30px;top:20px;z-index:1000;">
+    <a href="${pageContext.request.contextPath}/">首页</a>
+    <a href="${pageContext.request.contextPath}/project/add">新增</a>
+    <a href="${pageContext.request.contextPath}/project/search">查询</a>
+    <br>
+    <div id="main" align="center"><!--  style="position:absolute;left:30px;top:20px;z-index:1000;"> -->
     	<fieldset>
     		<legend>注册</legend>
 	    	<form name="form1">

@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,19 +13,20 @@
 <script language="javascript">
 $(document).ready(function(){
 	init();
+	$("#bak").attr("disabled",true);
 });
 
 var arrs = ["serial","serialname","description","fuzeren","fuzerentel","starttime","deadtime","bak2","bak"];
 var dic = {
-		serial:"项目序号",
+		serial:"项目编号",
 		serialname:"项目名称",
 		description:"项目描述",
 		fuzeren:"负责人",
 		fuzerentel:"联系号码",
-		starttime:"项目开始时间",
-		deadtime:"项目截至时间",
+		starttime:"开始时间",
+		deadtime:"截至时间",
 		bak2:"其他",
-		bak:"bak"
+		bak:"最后登记时间"
 };
 var mainConfig = {
 		serial:"",
@@ -36,10 +39,34 @@ var mainConfig = {
 		bak2:"",
 		bak:""
 };
+var types = {
+		serial:"text",
+		serialname:"text",
+		description:"text",
+		fuzeren:"text",
+		fuzerentel:"text",
+		starttime:"date",
+		deadtime:"date",
+		bak2:"text",
+		bak:"date"
+};
+
+var values = {
+		serial:"",
+		serialname:"",
+		description:"",
+		fuzeren:"",
+		fuzerentel:"",
+		starttime:"<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date()) %>",
+		deadtime:"<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date()) %>",
+		bak2:"",
+		bak:"<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date()) %>"
+};
 function init(){
-	var str = "<fieldset><legend>新增</legend><table>";
+	var str = "<fieldset><legend>新增</legend><table border='1' style='border-collapse: collapse;'>";
 	for(var i=0;i<arrs.length;i++){
-		str += "<tr><td align=\"right\"> "+dic[arrs[i]]+":</td><td align=\"left\"><input type=\"text\" id=\""+arrs[i]+"\" name=\""+arrs[i]+"\" style=\"width: 200px;\" /></td>	</tr>"
+		/* str += "<tr><td align=\"right\"> "+dic[arrs[i]]+":</td><td align=\"left\"><input type=\"text\" id=\""+arrs[i]+"\" name=\""+arrs[i]+"\" style=\"width: 200px;\" /></td>	</tr>" */
+		str += "<tr><td align=\"right\"> "+dic[arrs[i]]+":</td><td align=\"left\"><input type='"+types[arrs[i]]+"' id=\""+arrs[i]+"\" name=\""+arrs[i]+"\" style=\"width: 200px;\" value='"+values[arrs[i]]+"'/></td>	</tr>"
 	}
 	str += "<tr><td colspan=\"2\" align=\"center\"><input type=\"button\" id=\"btn\" name=\"btn\" value=\"新增\" style=\"width: 100px;\" /></td>	</tr></table></fieldset>";
 	$("#main").html(str);
@@ -69,7 +96,7 @@ function init(){
 				for(var i=0;i<arrs.length;i++){
 					mainConfig[arrs[i]] = $("#"+arrs[i]).val();
 				}
-				alert(mainConfig);
+				/* alert(mainConfig); */
 				
 				$.ajax("${pageContext.request.contextPath}/project/add",// 发送请求的URL字符串。
 						{
@@ -104,8 +131,8 @@ function init(){
 	</script>
 <body>
 
-    <a href="${pageContext.request.contextPath}/index.jsp">index</a>
-    <a href="${pageContext.request.contextPath}/project/search">search</a>
+    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
+    <a href="${pageContext.request.contextPath}/project/search">查询</a>
 	<div id="main" align="center">
 		<!-- <fieldset>
 			<legend>新增</legend>

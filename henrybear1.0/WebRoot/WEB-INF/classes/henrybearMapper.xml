@@ -38,16 +38,21 @@
     <update id="update_projectmanage"  parameterType="com.henrybear.bean.ProjectBean">
     	update projectmanage 
 		<set>
-	      <if test="serialname != null and serialname !=''">serialname=#{serialname},</if>
-	      <if test="description != null and description !=''">description=#{description},</if>
-	      <if test="fuzeren != null and fuzeren !=''">fuzeren=#{fuzeren},</if>
-	      <if test="fuzerentel != null and fuzerentel !=''">fuzerentel=#{fuzerentel},</if>
-	      <if test="starttime != null and starttime !=''">starttime=#{starttime},</if>
-	      <if test="deadtime != null and deadtime !=''">deadtime=#{deadtime},</if>
-	      <if test="bak != null and bak !=''">bak=#{bak},</if>
-	      <if test="bak1 != null and bak1 !=''">bak1=#{bak1},</if>
-	      <if test="bak2 != null and bak2 !=''">bak2=#{bak2}</if>
+	      <if test="serialname != null">serialname=#{serialname},</if>
+	      <if test="description != null">description=#{description},</if>
+	      <if test="fuzeren != null">fuzeren=#{fuzeren},</if>
+	      <if test="fuzerentel != null">fuzerentel=#{fuzerentel},</if>
+	      <if test="starttime != null">starttime=#{starttime},</if>
+	      <if test="deadtime != null">deadtime=#{deadtime},</if>
+	      <if test="bak != null">bak=#{bak},</if>
+	      <if test="bak1 != null">bak1=#{bak1},</if>
+	      <if test="bak2 != null">bak2=#{bak2}</if>
     	</set>
   		where serial=#{serial}
     </update>
+    
+    <delete id="delete_projectmanage"  parameterType="com.henrybear.bean.ProjectBean">
+    	delete from projectmanage where  serial=#{serial}
+    
+    </delete>
 </mapper>

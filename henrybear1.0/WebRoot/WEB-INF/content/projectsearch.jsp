@@ -43,7 +43,7 @@ function del(){
 			return;
 		}
 	}
-	alert("请选择需要修改的项");
+	alert("请选择需要删除的项");
 }
 
 function optioned(){
@@ -81,7 +81,7 @@ function optioned(){
 					   async:  true , // 默认设置下，所有请求均为异步请求。如果设置为false，则发送同步请求
 					   // 请求成功后的回调函数。
 					   success :function(data){
-						   var listable = "<fieldset><legend>查询结果</legend><table border='1' style='border-collapse: collapse;'><tr align='center'><th>序号</th><th>项目序号</th><th>项目名称</th><th>项目描述</th><th>负责人</th><th>联系号码</th><th>项目开始时间</th><th>项目截至时间</th><th>其他</th><th>登记时间</th><th>操作</th></tr>";
+						   var listable = "<table border='1' style='border-collapse: collapse;'><tr align='center'><th>序号</th><th>项目序号</th><th>项目名称</th><th>项目描述</th><th>负责人</th><th>联系号码</th><th>项目开始时间</th><th>项目截至时间</th><th>其他</th><th>最后登记时间</th><th>操作</th></tr>";
 						   $.each(data,function(){
 							   /* param.serial = this.serial;
 								param.serialname = this.serialname;
@@ -136,8 +136,8 @@ function optioned(){
 	</script>
 <body>
 
-    <a href="${pageContext.request.contextPath}/index.jsp">index</a>
-    <a href="${pageContext.request.contextPath}/project/add">add</a><br>
+    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
+    <a href="${pageContext.request.contextPath}/project/add">新增</a><br>
 	<div id="main" align="center">
 		<table>
 			<tr>
@@ -156,22 +156,13 @@ function optioned(){
 					style="width: 200px;" /></td>
 			</tr>
 			<tr>
-				<td align="right">项目开始时间 :</td>
-				<td align="left"><input type="text" id="starttime"
-					name="starttime" style="width: 200px;" /></td>
-			</tr>
-			<tr>
-				<td align="right">项目截至时间 :</td>
-				<td align="left"><input type="text" id="deadtime"
-					name="deadtime" style="width: 200px;" /></td>
-			</tr>
-			<tr>
 				<td colspan="2" align="center"><input type="button" id="btn"
 					name="btn" value="查询" style="width: 100px;" /></td>
 			</tr>
 
 		</table>
 	</div>
+	<fieldset><legend>查询结果</legend>
 	<div align="center" id="projectlist">
 		<!-- <fieldset>
 			<legend>查询结果</legend>
@@ -189,6 +180,6 @@ function optioned(){
 				</tr>
 			</table>
 		</fieldset> -->
-	</div>
+	</div></fieldset>
 </body>
 </html>

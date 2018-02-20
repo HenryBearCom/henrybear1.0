@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,15 +35,15 @@ public class ProjectController {
 
 	private static SqlSession sqlSession = null;
 	private static Logger log = Logger.getLogger("spring");
-	
+
 	@ModelAttribute
 	public void init(HttpServletRequest request) {
-		if(sqlSession == null) {
+		if (sqlSession == null) {
 			String webroot = request.getSession().getServletContext().getRealPath("/");
 			log.debug(webroot);
 			try {
 				sqlSession = MybatisFactory.getSqlSession(webroot);
-				log.info(sqlSession+" 会话已打开");
+				log.info(sqlSession + " 会话已打开");
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				log.error(e);
@@ -50,83 +51,87 @@ public class ProjectController {
 		}
 	}
 
-	@RequestMapping(value="/add",method=RequestMethod.GET)
+	/*
+	 * @RequestMapping(value="/{target}") public String target(@PathVariable String
+	 * target) { return target; }
+	 */
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String reAdd(HttpServletRequest request) {
 		return "projectadd";
 	}
 
-	@RequestMapping(value="/search",method=RequestMethod.GET)
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String reSearch(HttpServletRequest request) {
 		return "projectsearch";
 	}
-	
-	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public void add(@RequestBody ProjectBean project,HttpServletResponse response) throws IOException {
+
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public void add(@RequestBody ProjectBean project, HttpServletResponse response) throws IOException {
 		List<ProjectBean> list = null;
 		MessageBean msg = new MessageBean();
 		try {
-			log.debug("查询序号为"+project.getSerialname()+"的记录");
+			log.debug("查询序号为" + project.getSerialname() + "的记录");
 			list = sqlSession.selectList("henrybearMapper.select_projectlist", project);
-			if(list.size() > 0) {
-				log.error(project+"已经存在");
-				log.error(project+" insert 失败");
+			if (list.size() > 0) {
+				log.error(project + "已经存在");
+				log.error(project + " insert 失败");
 				msg.setFlag(false);
 				msg.setRetcode(110);
-				msg.setRetMsg(project.getSerialname()+"已经存在");
-			}else {
-				project.setBak(new SimpleDateFormat("yyyyMMdd").format(new Date()));
+				msg.setRetMsg(project.getSerialname() + "已经存在");
+			} else {
+				project.setBak(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 				log.debug("准备插入数据库");
 				int ret = sqlSession.insert("henrybearMapper.insert_projectmanage", project);
 				sqlSession.commit();
 				System.out.println(ret);
-				if(ret == 1) {
-					log.info(project+" insert 成功");
+				if (ret == 1) {
+					log.info(project + " insert 成功");
 					msg.setFlag(true);
 					msg.setRetcode(0);
 					msg.setRetMsg(project.getSerialname());
-				}else {
-					log.error(project+" insert 失败");
+				} else {
+					log.error(project + " insert 失败");
 					msg.setFlag(false);
 					msg.setRetcode(120);
 					msg.setRetMsg("insert 失败");
 				}
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			log.error(e);
-			log.error(project+" insert 失败");
+			log.error(project + " insert 失败");
 			msg.setFlag(false);
 			msg.setRetcode(120);
 			msg.setRetMsg(e.getMessage());
 		}
 		response.setContentType("text/html;charset=UTF-8");
-    	response.getWriter().println(JSONObject.toJSONString(msg));
+		response.getWriter().println(JSONObject.toJSONString(msg));
 	}
-	
 
-	@RequestMapping(value="/search",method=RequestMethod.POST)
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	@ResponseBody
-	public Object search(@RequestBody ProjectBean project,HttpServletResponse response) {
+	public Object search(@RequestBody ProjectBean project, HttpServletResponse response) {
 		List<ProjectBean> list = null;
 		MessageBean msg = new MessageBean();
 		try {
-			log.debug("查询序号为"+project.getSerialname()+"的记录");
+			log.debug("查询序号为" + project.getSerialname() + "的记录");
 			list = sqlSession.selectList("henrybearMapper.select_projectlist", project);
-			if(list.size() == 0) {
-				log.error(project+"不存在");
+			if (list.size() == 0) {
+				log.error(project + "不存在");
 				msg.setFlag(false);
 				msg.setRetcode(121);
-				msg.setRetMsg(project.getSerialname()+"不存在");
+				msg.setRetMsg(project.getSerialname() + "不存在");
 				return null;
-			}else {
+			} else {
 				return list;
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			log.error(e);
 			return null;
 		}
 	}
-	
-	@RequestMapping(value="/mod",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/mod", method = RequestMethod.GET)
 	public String mod(@RequestParam String q, Model model) throws IOException {
 
 		System.out.println(q);
@@ -135,63 +140,65 @@ public class ProjectController {
 		List<ProjectBean> list = null;
 		MessageBean msg = new MessageBean();
 		try {
-			log.debug("查询序号为"+project.getSerialname()+"的记录");
+			log.debug("查询序号为" + project.getSerialname() + "的记录");
 			list = sqlSession.selectList("henrybearMapper.select_projectlist", project);
-			if(list.size() == 0) {
-				log.error(project+"不存在");
+			if (list.size() == 0) {
+				log.error(project + "不存在");
 				msg.setFlag(false);
 				msg.setRetcode(121);
-				msg.setRetMsg(project.getSerialname()+"不存在");
+				msg.setRetMsg(project.getSerialname() + "不存在");
 				return "projectsearch";
-			}else if(list.size() > 1)  {
-				log.error(project+"有"+list.size()+"条");
+			} else if (list.size() > 1) {
+				log.error(project + "有" + list.size() + "条");
 				msg.setFlag(false);
 				msg.setRetcode(122);
-				msg.setRetMsg(project.getSerialname()+"有多条");
+				msg.setRetMsg(project.getSerialname() + "有多条");
 				return "projectsearch";
-			}else {
+			} else {
 				model.addAttribute("modproj", list.get(0));
 				System.out.println(list.get(0).toJson());
 				return "modproject";
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			log.error(e);
 			return "projectsearch";
 		}
 	}
-	@RequestMapping(value="/mod",method=RequestMethod.POST)
-	public void modUpdate(@RequestBody ProjectBean project, Model model, HttpServletResponse response) throws IOException {
+
+	@RequestMapping(value = "/mod", method = RequestMethod.POST)
+	public void modUpdate(@RequestBody ProjectBean project, Model model, HttpServletResponse response)
+			throws IOException {
 		log.debug(project.toJson());
-		
+
 		MessageBean msg = new MessageBean();
 		try {
-			log.debug("更新序号为"+project.getSerialname()+"的记录");
+			log.debug("更新序号为" + project.getSerialname() + "的记录");
 			int ret = sqlSession.update("henrybearMapper.update_projectmanage", project);
-			if(ret == 1) {
+			if (ret == 1) {
 				sqlSession.commit();
-				log.info(project.toJson()+"更新成功");
+				log.info(project.toJson() + "更新成功");
 				msg.setFlag(true);
 				msg.setRetcode(0);
-				msg.setRetMsg(project.getSerialname()+"更新成功");
-			}else{
+				msg.setRetMsg(project.getSerialname() + "更新成功");
+			} else {
 				sqlSession.rollback();
-				log.error(project.toJson()+"更新失败");
+				log.error(project.toJson() + "更新失败");
 				msg.setFlag(false);
 				msg.setRetcode(124);
-				msg.setRetMsg(project.getSerialname()+"更新失败");
+				msg.setRetMsg(project.getSerialname() + "更新失败");
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			log.error(e);
 			msg.setFlag(false);
 			msg.setRetcode(124);
-			msg.setRetMsg(project.getSerialname()+"更新失败");
-		}finally {
+			msg.setRetMsg(project.getSerialname() + "更新失败");
+		} finally {
 
-	    	response.getWriter().println(JSONObject.toJSONString(msg));
+			response.getWriter().println(JSONObject.toJSONString(msg));
 		}
 	}
-	
-	@RequestMapping(value="/del",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/del", method = RequestMethod.GET)
 	public String del(@RequestParam String q, Model model) throws IOException {
 
 		System.out.println(q);
@@ -200,29 +207,61 @@ public class ProjectController {
 		List<ProjectBean> list = null;
 		MessageBean msg = new MessageBean();
 		try {
-			log.debug("查询序号为"+project.getSerialname()+"的记录");
+			log.debug("查询序号为" + project.getSerialname() + "的记录");
 			list = sqlSession.selectList("henrybearMapper.select_projectlist", project);
-			if(list.size() == 0) {
-				log.error(project+"不存在");
+			if (list.size() == 0) {
+				log.error(project + "不存在");
 				msg.setFlag(false);
 				msg.setRetcode(121);
-				msg.setRetMsg(project.getSerialname()+"不存在");
+				msg.setRetMsg(project.getSerialname() + "不存在");
 				return "projectsearch";
-			}else if(list.size() > 1)  {
-				log.error(project+"有"+list.size()+"条");
+			} else if (list.size() > 1) {
+				log.error(project + "有" + list.size() + "条");
 				msg.setFlag(false);
 				msg.setRetcode(122);
-				msg.setRetMsg(project.getSerialname()+"有多条");
+				msg.setRetMsg(project.getSerialname() + "有多条");
 				return "projectsearch";
-			}else {
+			} else {
 				model.addAttribute("modproj", list.get(0));
 				System.out.println(list.get(0).toJson());
 				return "delproject";
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			log.error(e);
 			return "projectsearch";
 		}
 	}
-	
+
+	@RequestMapping(value = "/del", method = RequestMethod.POST)
+	public void delUpdate(@RequestBody ProjectBean project, Model model, HttpServletResponse response)
+			throws IOException {
+
+		log.debug(project.toJson());
+
+		MessageBean msg = new MessageBean();
+		try {
+			log.debug("更新序号为" + project.getSerialname() + "的记录");
+			int ret = sqlSession.delete("henrybearMapper.delete_projectmanage", project);
+			if (ret == 1) {
+				sqlSession.commit();
+				log.info(project.toJson() + "删除成功");
+				msg.setFlag(true);
+				msg.setRetcode(0);
+				msg.setRetMsg(project.getSerialname() + "删除成功");
+			} else {
+				sqlSession.rollback();
+				log.error(project.toJson() + "删除失败");
+				msg.setFlag(false);
+				msg.setRetcode(125);
+				msg.setRetMsg(project.getSerialname() + "删除失败");
+			}
+		} catch (Exception e) {
+			log.error(e);
+			msg.setFlag(false);
+			msg.setRetcode(125);
+			msg.setRetMsg(project.getSerialname() + "删除失败");
+		} finally {
+			response.getWriter().println(JSONObject.toJSONString(msg));
+		}
+	}
 }
